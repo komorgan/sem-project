@@ -33,14 +33,12 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 @login_required
 def add_item(request):
-    if request.user.is_staff:  # Admin check
-        # Logic to add item
+    if request.user.is_staff:
         pass
 
 @login_required
 def update_inventory(request):
     if request.user.groups.filter(name='Managers').exists():
-        # Logic for managers to update inventory
         pass
 
 
