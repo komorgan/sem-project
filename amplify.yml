@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm ci            # faster than npm install in build environment
+        - npm install            # faster than npm install in build environment
     build:
       commands:
         - npm run build
