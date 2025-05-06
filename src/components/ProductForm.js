@@ -3,19 +3,19 @@ import React, { useState } from 'react';
 export default function ProductForm({ onAdd }) {
   const [draft, setDraft] = useState({
     product_name: '',
-    description: '',
     quantity_in_stock: 0,
     price: 0.0
   });
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (!draft.product_name.trim()) return;
     onAdd(draft);
-    setDraft({ ...draft, product_name: '' });   // quick reset
+    setDraft({ ...draft, product_name: '' });
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
+    <form id="product-form" onSubmit={handleSubmit}>
       <input
         placeholder="Name"
         value={draft.product_name}
@@ -24,6 +24,7 @@ export default function ProductForm({ onAdd }) {
       <input
         placeholder="Quantity"
         type="number"
+        min="0"
         value={draft.quantity_in_stock}
         onChange={e =>
           setDraft({ ...draft, quantity_in_stock: Number(e.target.value) })
@@ -33,6 +34,7 @@ export default function ProductForm({ onAdd }) {
         placeholder="Price"
         type="number"
         step="0.01"
+        min="0"
         value={draft.price}
         onChange={e => setDraft({ ...draft, price: Number(e.target.value) })}
       />
@@ -40,3 +42,4 @@ export default function ProductForm({ onAdd }) {
     </form>
   );
 }
+
